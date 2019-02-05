@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SeasonDisplay from './SeasonDisplay.js';
+import SeasonDisplay from './SeasonDisplay.tsx';
+import Spinner from './Spinner';
 
 class App extends React.Component {
     state = {lat: undefined, errorMessage: undefined};
 
     render() {
-        console.log('render');
+        return (
+            <div className="border red">
+                {this.renderContent()}
+            </div>
+        );
+    }
+
+    renderContent() {
         if (this.state.errorMessage && !this.state.lat) {
             return (
                 <div>
@@ -23,7 +31,7 @@ class App extends React.Component {
         }
         return (
             <div>
-                Loading
+                <Spinner message="Please accept location permission"/>
             </div>
         );
     }
@@ -36,7 +44,6 @@ class App extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('component did update!');
     }
 }
 
