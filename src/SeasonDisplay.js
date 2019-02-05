@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+const WINTER = 'winter';
+const SPRING = 'spring';
+const SUMMER = 'summer';
+const AUTUMN = 'autumn';
+
 const getSeason = (lat, month) => {
-    const WINTER = 'winter';
-    const SPRING = 'spring';
-    const SUMMER = 'summer';
-    const AUTUMN = 'autumn';
     if (lat >= 0) {
         // north hemisphere or equator
         const northern_hemisphere_month_seasons = {
@@ -44,9 +45,21 @@ const getSeason = (lat, month) => {
 };
 
 const SeasonDisplay = (props) => {
+    const season = getSeason(props.lat, new Date().getMonth());
+    let text;
+    if (WINTER === season || AUTUMN === season) {
+        text = "it's chilly";
+    } else {
+        text = "let's head to the beach";
+    }
     return (
         <div>
-            Season display! {getSeason(props.lat, new Date().getMonth())}
+            <div>
+                Season display!
+            </div>
+            <div>
+                {text}
+            </div>
         </div>
     );
 };
